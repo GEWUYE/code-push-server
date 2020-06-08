@@ -30,7 +30,7 @@ app.use(log4js.connectLogger(log4js.getLogger("http"), {level: log4js.levels.INF
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/code-push-v1", express.static(path.join(__dirname, "public")));
 
 //use nginx in production
 //if (app.get('env') === 'development') {
@@ -72,13 +72,13 @@ if (_.get(config, 'common.storageType') === 'local') {
   }
 }
 
-app.use('/', routes);
-app.use('/v0.1/public/codepush', indexV1);
-app.use('/auth', auth);
-app.use('/accessKeys', accessKeys);
-app.use('/account', account);
-app.use('/users', users);
-app.use('/apps', apps);
+app.use('/code-push-v1/', routes);
+app.use('/code-push-v1/v0.1/public/codepush', indexV1);
+app.use('/code-push-v1/auth', auth);
+app.use('/code-push-v1/accessKeys', accessKeys);
+app.use('/code-push-v1/account', account);
+app.use('/code-push-v1/users', users);
+app.use('/code-push-v1/apps', apps);
 
 // development error handler
 // will print stacktrace
